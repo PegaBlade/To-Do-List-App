@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <title>To-Do List App</title>
+ <link rel="shortcut icon" href="https://i.imgur.com/droIaaO.png"/>
+ <script>
+  function addItem() {
+   var newItem = document.createElement("div");
+   newItem.innerHTML = document.getElementById("box").value;
+   newItem.onclick = removeItem;
+   document.getElementById("list").appendChild(newItem);
+   saveList();
+  }
+  function removeItem() {
+   document.getElementById("list").removeChild(this);
+   saveList();
+  }
+  function saveList() {
+   localStorage.storedList = document.getElementById("list").innerHTML;
+  }
+  function loadList() {
+   document.getElementById("list").innerHTML = localStorage.storedList;
+   for(var i = 0; i < list.children.length; i++) {
+    list.children[i].onclick = removeItem;
+   }
+  }
+ </script>
+ <style>
+  .header {
+    height:75px; 
+    width: 350px; 
+    background-color:lightblue; 
+    float: center; 
+    padding:10px; 
+    margin:20px;
+    text-align:centre; 
+    font-size:24px;
+  }
+  .app {
+    height:650px;
+    width: 1450px; 
+    background-color:lightgreen; 
+    float: center; 
+    padding:10px; 
+    margin:20px;
+    border-radius: 4px;
+  }
+  input[type="button"] {
+   background-color: pink;
+   text-align:center;
+  }
+.button {
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+input[type=text], select {
+  width: 90%;
+  padding: 12px 20px;
+  margin: auto;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+body {
+background-color:lightgreen;
+font-family: Arial, Helvetica, sans-serif;
+text-align:center;
+}
+
+ </style>
+</head>
+<body>
+ <div class="app">
+  <h1 style=font-style:bold; text-align:center;">To-Do List</h1>
+  <input type="text" id="box"/>
+  <br/>
+<div style="margin:auto;">
+  <input type="button" value="Add item" onclick="addItem();" class="button"/>
+</div>
+  <br/>
+   <div id="list" style="text-align:center;margin:auto;font-size:30px;font-family: Arial, Helvetica, sans-serif;"></div>
+ </div>
+ <script>
+  if(localStorage.storedList) {
+   loadList();
+  }
+ </script>
+</body>
+</html>
